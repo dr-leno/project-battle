@@ -10,10 +10,10 @@ const Popular = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [repos, setRepos] = useState([]);
     const [error, setError] = useState(null);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams({ lang: 'All' });
 
 
-    const selectedLanguage = searchParams.get('lang') || 'All';
+    const selectedLanguage = searchParams.get('lang');
 
     useEffect(() => {
         setIsLoading(true);
@@ -26,6 +26,9 @@ const Popular = () => {
     }, [selectedLanguage]);
 
     const onTabClick = (lang) => {
+        if (isLoading){
+            return;
+        }
         setSearchParams({ lang: lang });
     }
 
